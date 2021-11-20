@@ -10,11 +10,14 @@ CitaCtrl.listar = async() => {
 };
 
 CitaCtrl.insertar = async(cita) => {
+    delete cita._id;
     return await citaDAO.create(cita);
 };
 
 CitaCtrl.actualizar = async(cita) => {
-    return await citaDAO.findByIdAndUpdate(cita._id, cita);
+    let id = cita._id;
+    delete cita._id;
+    return await citaDAO.findByIdAndUpdate(id, cita);
 };
 
 CitaCtrl.eliminar = async(id) => {

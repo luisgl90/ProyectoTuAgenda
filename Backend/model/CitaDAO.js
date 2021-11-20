@@ -2,14 +2,15 @@ const conexion = require("../DB/conexionDB");
 
 //const citaSchema = conexion.Schema(array_estruct_tablaDB,array_config)
 const citaSchema = conexion.Schema({
-    horaFecha: Date,
+    hora: String,
+    fecha: String,
     estado: String,
-    precio: Number,
+    precio: String,
     paciente: {
         _id: String,
         nombre: String,
         apellido: String,
-        documento: Number
+        documento: String
     },
     medico: {
         _id: String,

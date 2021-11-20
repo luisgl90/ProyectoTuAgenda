@@ -1,0 +1,98 @@
+<h2>Lista de Citas</h2>
+<table border="2">
+    <tr>
+        <td>Paciente</td>
+        <td>Documento</td>
+        <td>Médico</td>
+        <td>Especialidad</td>
+        <td>Hora</td>
+        <td>Fecha</td>
+        <td>Estado</td>
+        <td>Precio</td>
+    </tr>
+
+    <tr *ngFor="let cita of listaCitas">
+        <td>{{cita.paciente.nombre + " " + cita.paciente.apellido}}</td>
+        <td>{{cita.paciente.documento}}</td>
+        <td>{{cita.medico.nombre + " " + cita.medico.apellido}}</td>
+        <td>{{cita.medico.especialidad}}</td>
+        <td>{{cita.hora}}</td>
+        <td>{{cita.fecha}}</td>
+        <td>{{cita.estado}}</td>
+        <td>{{cita.precio}}</td>
+        <td>
+            <button (click)=eliminarCitas(cita._id)>
+            <img height="20" src="../../../assets/img/delete_icon.png">
+          </button>
+        </td>
+        <td>
+            <button (click)=mostrarCitas(cita)>
+            <img height="20" src="../../../assets/img/edit_icon.png">
+          </button>
+        </td>
+    </tr>
+
+</table>
+
+<hr>
+<h3>Datos de la cita</h3>
+<table>
+    <tr>
+        <td>Hora</td>
+        <input type="time" id="hora" name="hora" min="08:00" max="18:00" required [(ngModel)]="cita.hora">
+    </tr>
+    <tr>
+        <td>Fecha</td>
+        <input type="date" id="fecha" name="fecha" min="2021-11-19" max="2021-12-31" [(ngModel)]="cita.fecha">
+    </tr>
+
+    <tr>
+        <td>Estado</td>
+        <td><input type="text" name=estado [(ngModel)]="cita.estado"></td>
+    </tr>
+    <tr>
+        <td>Precio</td>
+        <td><input type="text" name=precio [(ngModel)]="cita.precio"></td>
+    </tr>
+</table>
+
+<hr>
+<h3>Datos paciente</h3>
+<table>
+    <tr>
+        <td>Nombre</td>
+        <td><input type="text" name=nombrePaciente [(ngModel)]="cita.paciente.nombre"></td>
+    </tr>
+    <tr>
+        <td>Apellido</td>
+        <td><input type="text" name=apellidoPaciente [(ngModel)]="cita.paciente.apellido"></td>
+    </tr>
+    <tr>
+        <td>Documento</td>
+        <td><input type="text" name=documentoPaciente [(ngModel)]="cita.paciente.documento"></td>
+    </tr>
+</table>
+<hr>
+
+<hr>
+<h3>Datos médico</h3>
+<table>
+    <tr>
+        <td>Nombre</td>
+        <td><input type="text" name=nombreMedico [(ngModel)]="cita.medico.nombre"></td>
+    </tr>
+    <tr>
+        <td>Apellido</td>
+        <td><input type="text" name=apellidoMedico [(ngModel)]="cita.medico.apellido"></td>
+    </tr>
+    <tr>
+        <td>Especialidad</td>
+        <td><input type="text" name=especialidad [(ngModel)]="cita.medico.especialidad"></td>
+    </tr>
+</table>
+<hr>
+
+<tr>
+    <button (click)="guardarCitas()">Guardar</button>
+    <button (click)="limpiarFormulario()">Limpiar</button>
+</tr>
