@@ -1,22 +1,22 @@
 const express = require("express");
 const cors = require("cors");
-//const personasCtrl = require("./controller/PersonaCtrl");
 const citaCtrl = require("./controller/CitaCtrl");
 const medicoCtrl = require("./controller/MedicoCtrl");
 
 const app = express();
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 
 
 //*************************************Citas*************************************/
 app.get("/api/citas", async(request, response) => { //Esperando respuesta
+    //console.log("Lista de citas!");
     try {
         const citas = await citaCtrl.listar(); //Espera hasta crear el objeto en la DB
         response.status(200).json(citas);
     } catch (error) {
         console.log("Get citas error: " + error);
-        response.status(400).send("Get citas error: " + error);
+        response.status(204).json("Get citas error: " + error);
     }
 });
 
@@ -25,10 +25,10 @@ app.post("/api/citas", async(request, response) => { //Esperando respuesta
     const cita = request.body;
     try {
         await citaCtrl.insertar(cita); //Espera hasta crear el objeto en la DB
-        response.status(201).send("cita registrado exitosamente!");
+        response.status(201).json("cita registrado exitosamente!");
     } catch (error) {
         console.log("Insert citas error: " + error);
-        response.status(400).send("Insert citas error: " + error);
+        response.status(204).json("Insert citas error: " + error);
     }
 });
 
@@ -36,10 +36,10 @@ app.put("/api/citas", async(request, response) => { //Esperando respuesta
     const cita = request.body;
     try {
         await citaCtrl.actualizar(cita); //Espera hasta crear el objeto en la DB
-        response.status(200).send("cita actualizado exitosamente!");
+        response.status(200).json("Cita actualizada exitosamente!");
     } catch (error) {
         console.log("Update cita error: " + error);
-        response.status(400).send("Update cita error: " + error);
+        response.status(204).json("Update cita error: " + error);
     }
 });
 
@@ -48,10 +48,10 @@ app.delete("/api/citas/:id", async(request, response) => { //Esperando respuesta
     const id = request.params.id;
     try {
         await citaCtrl.eliminar(id); //Espera hasta crear el objeto en la DB
-        response.status(201).send("cita eliminada exitosamente!");
+        response.status(201).json("cita eliminada exitosamente!");
     } catch (error) {
         console.log("Delete cita error: " + error);
-        response.status(400).send("Delete cita error: " + error);
+        response.status(204).json("Delete cita error: " + error);
     }
 });
 
